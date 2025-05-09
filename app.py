@@ -11,7 +11,7 @@ st.markdown("""
     <style>
     html, body, [class*="css"] {
         font-family: 'Segoe UI', sans-serif;
-        background-color: #f9f9f9;
+        background-color: #e6f0ff; /* Light Blue */
         color: #333;
     }
     .stButton > button {
@@ -29,7 +29,7 @@ st.markdown("""
         cursor: pointer;
     }
     .stTextArea textarea {
-        background-color: #f0f0f5;
+        background-color: #f0f4f8;
         border: 1px solid #ccc;
         border-radius: 8px;
         padding: 10px;
@@ -39,13 +39,13 @@ st.markdown("""
         text-align: center;
         font-size: 3em;
         font-weight: 700;
-        color: #4a4e69;
+        color: #003366;
         margin-bottom: 0.2em;
     }
     .subtitle {
         text-align: center;
         font-size: 1.3em;
-        color: #555;
+        color: #444;
         margin-bottom: 1.5em;
     }
     .section-header {
