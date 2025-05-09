@@ -1,0 +1,5 @@
+pypdf  # for pdf
+langchain 
+google-generativeai  # for LLM
+streamlit # for frontend
+python-dotenv # for local variables
