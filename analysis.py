@@ -2,7 +2,7 @@ import google.generativeai as genai
 from pdf import read_pdf
 import streamlit as st
 import os
-genai.configure(api_key =os.getenv("GOOGLE_API_1"))
+genai.configure(api_key =os.getenv("GOOGLE-API-KEY"))
 
 model = genai.GenerativeModel("gemini-2.0-flash")
 
