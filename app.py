@@ -1,66 +1,93 @@
 from dotenv import load_dotenv
-load_dotenv()  # Activate Local Env Vars
+load_dotenv()
 
 import streamlit as st
 import google.generativeai as genai
 from pdf import read_pdf
 from analysis import profile
 
-# Custom CSS styling
+# Inject modern CSS
 st.markdown("""
     <style>
-    .main {
-        background-color: #f8f9fa;
+    html, body, [class*="css"] {
+        font-family: 'Segoe UI', sans-serif;
+        background-color: #f9f9f9;
+        color: #333;
+    }
+    .stButton > button {
+        background-color: #4CAF50;
+        color: white;
+        border: none;
+        padding: 0.7em 1.5em;
+        border-radius: 8px;
+        transition: background-color 0.3s ease;
+        font-size: 1.1em;
+        margin-top: 1em;
+    }
+    .stButton > button:hover {
+        background-color: #45a049;
+        cursor: pointer;
+    }
+    .stTextArea textarea {
+        background-color: #f0f0f5;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        padding: 10px;
+        font-size: 1em;
     }
     .title {
-        font-size: 2.5em;
-        color: #0066cc;
-        font-weight: bold;
+        text-align: center;
+        font-size: 3em;
+        font-weight: 700;
+        color: #4a4e69;
+        margin-bottom: 0.2em;
     }
     .subtitle {
-        color: #333;
+        text-align: center;
         font-size: 1.3em;
-        margin-bottom: 10px;
+        color: #555;
+        margin-bottom: 1.5em;
     }
-    .sidebar .sidebar-content {
-        background-color: #e9ecef;
+    .section-header {
+        font-size: 1.5em;
+        font-weight: 600;
+        margin-top: 2em;
+        color: #333;
     }
     </style>
-    """, unsafe_allow_html=True)
+""", unsafe_allow_html=True)
 
-# Header
-st.markdown('<p class="title">🧠 Resume Analysis using AI</p>', unsafe_allow_html=True)
-st.markdown('<p class="subtitle">🚀 Enhance your resume match with job descriptions using the power of Gen AI</p>', unsafe_allow_html=True)
+# Title and Subtitle
+st.markdown('<div class="title">🤖 Resume Analysis using AI</div>', unsafe_allow_html=True)
+st.markdown('<div class="subtitle">Match your resume with job descriptions using Generative AI 🔍</div>', unsafe_allow_html=True)
 st.divider()
 
-# Tips section
-with st.expander("📌 Tips for Using the Application", expanded=True):
+# Tips Section
+with st.expander("💡 Tips for Using This Tool", expanded=True):
     st.markdown("""
-    - 📄 **Upload your Resume** (PDF format only).
-    - 💼 **Paste Job Description** from job boards.
-    - 🔍 **Click the Button** to generate actionable insights powered by Gen AI.
+    - 📄 **Upload your Resume** (PDF only).
+    - 📝 **Paste the Job Description** you want to match against.
+    - ⚡ **Click the button** to generate AI-driven insights and feedback.
     """)
 
-# Sidebar: Resume Upload
+# Sidebar for Upload
 with st.sidebar:
-    st.subheader("📄 Upload Your Resume")
-    resume = st.file_uploader(label="Upload your resume", type=["pdf"])
-    st.info("Only PDF format is supported.")
+    st.subheader("📎 Upload Resume")
+    resume = st.file_uploader("Choose a PDF resume", type=["pdf"])
+    st.caption("Max file size: 10MB")
 
-# Main: Job Description and Analysis
-st.subheader("💼 Enter the Job Description")
-job_desc = st.text_area(label="Paste Job Description Here", max_chars=10000, height=200, placeholder="E.g. We are looking for a Data Scientist...")
+# Job Description Input
+st.markdown('<div class="section-header">💼 Enter the Job Description</div>', unsafe_allow_html=True)
+job_desc = st.text_area("Paste Job Description Here", placeholder="E.g. We are looking for a Data Scientist...", height=220, max_chars=10000)
 
-# Button and Output
-st.markdown("### 🔍 Analysis")
-button = st.button("✨ Get AI Powered Insights")
+# Submit button
+button = st.button("🚀 Get AI-Powered Insights")
 
 if button:
     if not resume:
-        st.warning("⚠️ Please upload your resume.")
+        st.warning("⚠️ Please upload your resume first.")
     elif not job_desc.strip():
         st.warning("⚠️ Please paste a job description.")
     else:
-        with st.spinner("Analyzing... 🔎"):
-            output = profile(resume=resume, job_desc=job_desc)
-            st.markdown(output, unsafe_allow_html=True)
+        with st.spinner("Processing... 🔄"):
+            st.markdown(profile(resume=resume, job_desc=job_desc), unsafe_allow_html=True)
