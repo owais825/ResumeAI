@@ -4,7 +4,7 @@ load_dotenv() #Activate the Local Ens Vars
 import streamlit as st
 import google.generativeai as genai
 from pdf import read_pdf
-from ResumeAI.analysis import profile
+from analysis import profile
 
 ## create the front End.. 
 st.header(":blue[Resume Analysis] using AI", divider = "green")
