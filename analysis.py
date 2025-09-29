@@ -13,9 +13,10 @@ def profile(resume,job_desc):
         st.markdown("Resume has been uploaded")
     else:
         st.warning("Resume Missing")
-    fit = model.generate_content(f'''Read the resume and job description. Give the candidate friendly, actionable feedback on how well they match and how they can improve.
-    
+    fit = model.generate_content(f'''Read the resume and job description. Give the candidate friendly, 
+    actionable feedback on how well they match and how they can improve. 
     Job Description:{job_desc}
-    Resume:{resume}''')
+    Resume:{resume}
+    Also mention chances of fit in percentage''')
     ## Return the result
     return(st.write(fit.text))
