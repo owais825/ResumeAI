@@ -13,6 +13,9 @@ def profile(resume,job_desc):
         st.markdown("Resume has been uploaded")
     else:
         st.warning("Resume Missing")
-    fit = model.generate_content(f'''ACt as a HR or ops head in AI domain and compare {resume} with {job_desc} and suggest - Am I a Good fit?''')
+    fit = model.generate_content(f'''Read the resume and job description. Give the candidate friendly, actionable feedback on how well they match and how they can improve.
+    
+    Job Description:{job_desc}
+    Resume:{resume}''')
     ## Return the result
     return(st.write(fit.text))
